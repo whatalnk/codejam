@@ -1,17 +1,17 @@
-# WA
+# AC
 t = gets.chomp.to_i
-sq = (1..100).map{|x| x * x}
-
+sq = (1..10000).map{|x| x*x}
 t.times do |c|
   n = gets.chomp.to_i
-  nn = n
-  ans = 0
-  nums = []
-  while n > 0
-    i = sq.bsearch_index{|x| x > n}
-    nums << sq[i - 1]
-    n -= sq[i - 1]
-    ans += 1
+  a = (0..n).to_a
+  (1).upto(n) do |i|
+    (0).upto(n) do |j|
+      if i >= sq[j]
+        a[i] = [a[i], a[i - sq[j]] + 1].min
+      else
+        break
+      end
+    end
   end
-  puts "Case ##{c + 1}: #{ans}"
+  puts "Case ##{c + 1}: #{a[n]}"
 end
